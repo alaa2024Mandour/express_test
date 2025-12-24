@@ -34,14 +34,27 @@ app.post("/users",(req,res,next)=>{
 
 })
 
-// -- patch --
-app.patch("/users/:id",(req,res,next)=>{  
-    //# send data from params >> required #
-    //NOTE >> if you want to recieve any thing from params put this api at the end because if you want to access route after users like users/ages it will parse the ages word at the params
-    res.status(200).json({message:"User",params:req.params}) 
-    //------------------------------------
-    //res.status(200).json({message:"Patch User"}) 
-})
+app.post("/users/info",
+    // middleware >> it is a normal function make a validation 
+    (req,res,next)=>{
+        if(!req.body.role){
+            return res.status(400).json({massage:"role is required"});
+        }
+        next(); // to go to the next middleware
+    },
+
+    // middleware 2
+    (req,res,next)=>{
+        if(req.body.role == "admin"){
+            return res.status(200).json({massage:"Welcome Admin"});
+        }
+        next(); // to go to the next middleware
+    },
+    // middleware 3
+    (req,res,next)=>{
+        return res.status(400).json({massage:"not auth"});
+    },
+)
 
 // -- delete --
 app.delete("/users",(req,res,next)=>{
