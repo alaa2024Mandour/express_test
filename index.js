@@ -7,7 +7,7 @@ port = 3000;
 // method (url,callback function hold posetional args (req,res,next)=>{})
 // -- get --
 app.get("/users",(req,res,next)=>{
-    // res.status(200).send("Hello Aloaaa") //send function can hold any type of masseges like >> text , json , html , etc
+    // res.status(200).send("Hello Aloaaa") //send function can hold any type of masseges like >> text, json, html, etc
     // res.status(200).send("<h1>Hello Aloaaa</h1>")
     // res.status(200).send({message:"Hello Aloaaa"})
 
